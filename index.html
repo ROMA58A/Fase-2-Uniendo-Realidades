@@ -1,5 +1,7 @@
 
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -64,16 +66,80 @@
 
     .project-Imagennnnnnn img { max-width: 100%; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
 
+
+    /* Cards de características */
+    .feature {
+      position: relative;
+      text-align: center;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 18px;
+      background-color: #fff;
+      border: 1px solid #f0f0f0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: all 0.4s ease;
+      overflow: hidden;
+    }
+    .feature::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.15);
+      transform: skewX(-20deg);
+      transition: all 0.5s;
+    }
+    .feature:hover::before { left: 100%; }
+    .feature:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      border-color: #007bff;
+    }
+    .feature i {
+      font-size: 3rem;
+      color: #007bff;
+      margin-bottom: 15px;
+    }
+    .feature h5 { font-weight: 700; color: #333; }
+
+    .codigo-estudiante {
+      color: #004d99;
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-top: 10px;
+    }
     footer { text-align: center; padding: 40px 10px; border-top: 1px solid #e0e0e0; color: #777; font-size: 0.9rem; background-color: #fafafa; }
 
     /* Animaciones */
-    .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 1s forwards; }
     .fade-in.delay-1 { animation-delay: 0.3s; }
     .fade-in.delay-2 { animation-delay: 0.6s; }
     .fade-in.delay-3 { animation-delay: 0.9s; }
     .fade-in.delay-4 { animation-delay: 1.2s; }
-
+   .fade-in { opacity: 0; transform: translateY(20px); animation: fadeInUp 1s forwards; }
+ 
     @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+
+    
+    /* Botón volver arriba */
+    #backToTopBtn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 45px;
+      height: 45px;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0.85;
+      transition: all 0.3s;
+    }
+    #backToTopBtn:hover {
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+
   </style>
 </head>
 <body ata-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70" tabindex="0" data-aos-delay="300">
@@ -104,7 +170,7 @@
       <p>
         <strong>Grupo</strong>3<br>
         <strong>Materia:</strong> Tecnologías Inmersivas | <strong>Docente:</strong> ing. Mario Jose Platero Villatoro<br>
-        <strong>Fecha:</strong> 11 de octubre de 2025
+        <strong>Fecha:</strong> 18 de octubre de 2025
       </p>
     </div>
   </header>
@@ -275,18 +341,44 @@ En conjunto, <em>“Uniendo Realidades”</em> no solo evidencia el dominio téc
 
   </section>
 
-  <footer>
-    <p>Copyright ROMA. All Rights Reserved</p>
-  </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <section id="equipo" class="bg-light py-5 text-center">
+    <h2><i class="fa-solid fa-users me-2"></i>Equipo de Desarrollo 🎓</h2>
+    <div class="container mt-4">
+      <div class="row justify-content-center">
+        <div class="col-md-4 feature"><i class="fa-solid fa-user-circle"></i><h5>ELMER OSWALDO CALDERÓN CORTEZ</h5><p class="codigo-estudiante">CC-58126-19</p></div>
+        <div class="col-md-4 feature"><i class="fa-solid fa-user-circle"></i><h5>ALLISON GABRIELA GARCÍA PONCE</h5><p class="codigo-estudiante">GP-64074-23</p></div>
+        <div class="col-md-4 feature"><i class="fa-solid fa-user-circle"></i><h5>OSCAR ALEXANDER CERÓN HERNÁNDEZ</h5><p class="codigo-estudiante">CH-64069-23</p></div>
+        <div class="col-md-4 feature"><i class="fa-solid fa-user-circle"></i><h5>MARÍA DE LOS ÁNGELES ACOSTA ARDÓN</h5><p class="codigo-estudiante">AA-64964-23</p></div>
+        <div class="col-md-4 feature"><i class="fa-solid fa-user-circle"></i><h5>JOSELINE ABIGAIL TORRES JURADO</h5><p class="codigo-estudiante">TJ-64893-23</p></div>
+        <div class="col-md-4 feature"><i class="fa-solid fa-user-circle"></i><h5>BRANDON MISAEL RODRIGO AYALA</h5><p class="codigo-estudiante">RA-60677-21</p></div>
+      </div>
+    </div>
+  </section>
 
  
+  <a href="#top" id="backToTopBtn" class="btn btn-primary rounded-circle shadow-lg">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <footer><p>© 2025 ROMA. Todos los derechos reservados.</p></footer>
+
+  <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
-    AOS.init({ once: true, mirror: true });
-    
+    AOS.init({ once: true });
+
+    window.onload = () => {
+      const preloader = document.getElementById('preloader');
+      preloader.classList.add('preloader-hidden');
+      setTimeout(() => preloader.remove(), 500);
+    };
+
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    window.addEventListener('scroll', () => {
+      backToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
   </script>
 </body>
 </html>
